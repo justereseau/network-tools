@@ -2,6 +2,7 @@ name: Deploy Images to GHCR
 
 env:
   IMAGE_NAME: ghcr.io/justereseau/network-tools
+  DOCKERHUB_NAME: lucasmaurice/network-tools
 
 on:
   workflow_dispatch:
@@ -40,3 +41,22 @@ jobs:
           build-args: |
             COMMIT_SHA=${{ github.sha }}
           tags: ${{ env.IMAGE_NAME }}:latest,${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          build-args: |
+            COMMIT_SHA=${{ github.sha }}
+          tags: ${{ env.DOCKERHUB_NAME }}:latest,${{ env.DOCKERHUB_NAME }}:${{ github.sha }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          provenance: true
+          sbom: true
