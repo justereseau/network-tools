@@ -47,7 +47,6 @@ jobs:
           provenance: true
           sbom: true
           push: true
-          load: true
           build-args: |
             COMMIT_SHA=${{ github.sha }}
           tags: ${{ env.IMAGE_NAME }}:latest,${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.DOCKERHUB_NAME }}:latest,${{ env.DOCKERHUB_NAME }}:${{ github.sha }}
