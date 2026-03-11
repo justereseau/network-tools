@@ -16,7 +16,7 @@ RUN ln -fs /usr/share/zoneinfo/America/Toronto /etc/localtime && \
   echo "America/Toronto" > /etc/timezone && \
   apt-get update && apt-get install -y tzdata
 
-RUN apt-get update ; apt-get dist-upgrade -y ; apt-get install -y curl ca-certificates yq jq
+RUN apt-get update ; apt-get dist-upgrade -y ; apt-get install -y curl ca-certificates yq jq expect
 RUN apt-get install -y mysql-client iputils-ping dnsutils mtr traceroute
 RUN apt-get install -y telnet netcat-openbsd
 RUN apt-get install -y nmap iperf3 tcpdump ftp wget
