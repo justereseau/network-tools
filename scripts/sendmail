@@ -1,0 +1,27 @@
+#!/usr/bin/expect -f
+
+set timeout 10
+
+set smtp_server [lindex $argv 0]
+set smtp_port   [lindex $argv 1]
+set mail_addr   [lindex $argv 2]
+
+spawn telnet $smtp_server $smtp_port
+
+expect "220"
+send "HELO smtp-relay-kube\r"
+expect "250"
+send "MAIL FROM:<$mail_addr>\r"
+expect "250"
+send "RCPT TO:<$mail_addr>\r"
+expect "250"
+send "DATA\r"
+expect "354"
+send "Subject: Test SMTP Relay\r"
+send "\r"
+send "We are testing the SMTP relay.\nPlease ignore this email.\r"
+send "\r"
+send ".\r"
+expect "250"
+send "QUIT\r"
+expect "221"

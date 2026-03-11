@@ -23,6 +23,8 @@ RUN apt-get install -y nmap iperf3 tcpdump ftp wget
 
 RUN apt-get autoremove -y ; apt-get clean -y ; rm -rf /var/lib/apt/lists/*
 
+COPY --chown=root:root --chmod=755 ./scripts/ /usr/bin/
+
 USER 1000
 
 CMD [ "/usr/bin/bash" ]
