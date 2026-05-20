@@ -18,7 +18,7 @@ RUN ln -fs /usr/share/zoneinfo/America/Toronto /etc/localtime && \
 
 RUN apt-get update ; apt-get dist-upgrade -y ; apt-get install -y curl ca-certificates yq jq expect
 RUN apt-get install -y mysql-client iputils-ping dnsutils mtr traceroute
-RUN apt-get install -y telnet netcat-openbsd
+RUN apt-get install -y telnet netcat-openbsd openssh-client
 RUN apt-get install -y nmap iperf3 tcpdump ftp wget
 RUN apt-get install -y tree rsync rclone
 
@@ -29,3 +29,4 @@ COPY --chown=root:root --chmod=755 ./scripts/ /usr/bin/
 USER 1000
 
 CMD [ "/usr/bin/bash" ]
+
