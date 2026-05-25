@@ -2,7 +2,7 @@ name: Deploy Images to GHCR
 
 env:
   IMAGE_NAME: ghcr.io/justereseau/network-tools
-  DOCKERHUB_NAME: lucasmaurice/network-tools
+  DOCKERHUB_NAME: justereseau/network-tools
 
 on:
   workflow_dispatch:
